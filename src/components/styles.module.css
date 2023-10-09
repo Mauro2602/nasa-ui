@@ -136,3 +136,19 @@
 .detail {
   z-index: 3;
 }
+
+.select {
+  position: absolute;
+  right: 2rem;
+}
+
+.idiom {
+  position: absolute;
+  top: 3rem;
+  right: 0.8rem;
+  padding: 1rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  background-color: cadetblue;
+  color: white;
+}

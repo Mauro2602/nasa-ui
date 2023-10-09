@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 import ForestGuardian from "../assets/forestGuardian.jpeg";
 
@@ -29,10 +29,37 @@ export const CartDetail = ({ title = "", description = "", video = "" }) => {
   );
 };
 
-export const NavBar = ({ title }) => {
+export const NavBar = ({ title, setIdiom }) => {
+  const [open, setOpen] = useState(false);
+  const [lan, setLan] = useState("en");
   return (
     <div className={styles.navbar}>
       <h1 className={styles["text-navbar"]}>{title}</h1>
+      <div onClick={() => setOpen(!open)} className={styles.select}>
+        <strong>idiom: {lan}</strong>
+      </div>
+      {open && (
+        <div className={styles["idiom"]}>
+          <p
+            onClick={() => {
+              setOpen(false);
+              setLan("en");
+              setIdiom("en");
+            }}
+          >
+            en
+          </p>
+          <p
+            onClick={() => {
+              setOpen(false);
+              setLan("es");
+              setIdiom("es");
+            }}
+          >
+            es
+          </p>
+        </div>
+      )}
     </div>
   );
 };
@@ -58,11 +85,12 @@ export const InputStyled = ({ label, value, placeholder, onChangeValue }) => {
 export const ForestGuardianButton = () => {
   return (
     <div>
-      <div className={styles["float-alert"]}>
-        hay un incendio a 500m de tu ubicacion
-      </div>
       <div className={styles["float-button"]}>
-        <img className={styles.image} src={ForestGuardian} alt={'forest guardian logo'} />
+        <img
+          className={styles.image}
+          src={ForestGuardian}
+          alt={"forest guardian logo"}
+        />
       </div>
     </div>
   );

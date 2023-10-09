@@ -112,12 +112,15 @@
     flex-direction: row;
     column-gap: 1rem;
     row-gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .capacitation-card {
     border: 1px solid darkgray;
     padding: 0.5rem;
     border-radius: 1rem;
+    max-width: 40%;
 }
 
 .capacitation-card p {

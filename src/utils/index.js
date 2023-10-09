@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 export const sendPostInformation = async ({ url, body }) => {
-  const apiUrl = `https://98f9-2800-e2-c380-c80-d82f-5091-9dc7-f7ee.ngrok.io/${url}`;
-
-  console.log(apiUrl);
+  const apiUrl = `http://localhost:8080/${url}`;
 
   try {
     const response = await axios.post(apiUrl, body, {
@@ -17,5 +15,21 @@ export const sendPostInformation = async ({ url, body }) => {
   } catch (error) {
     console.error('Error response:', error);
     throw new Error('Error en la petición: ' + error.message);
+  }
+};
+
+export const sendGetRequest = async ({ url, params }) => {
+  const apiUrl = `http://localhost:8080/${url}`;
+
+  try {
+    const response = await axios.get(apiUrl, {
+      params: params,
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error en la petición GET: ' + error.message);
   }
 };

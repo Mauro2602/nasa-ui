@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ForestGuardianButton, InputStyled, NavBar } from "../../components";
 import styles from "../styles.module.css";
 import { languages } from "../../config/idiom";
@@ -6,6 +6,7 @@ import { sendPostInformation } from "../../utils";
 
 export const HomeScreen = ({ setIdiom, setScreen, idiom, position }) => {
   const [values, setValues] = useState({ email: "", name: "" });
+  const [auxFlag, setAuxFlag] = useState(false);
 
   const flag = JSON.parse(localStorage.getItem("email"));
 
@@ -21,10 +22,17 @@ export const HomeScreen = ({ setIdiom, setScreen, idiom, position }) => {
     };
     console.log(data);
     await sendPostInformation({ url: "users", body: data });
-    // localStorage.setItem("email", JSON.stringify(values.email));
+    localStorage.setItem("email", JSON.stringify(values.email));
+    setAuxFlag(true);
   };
 
-  if (!flag) {
+  useEffect(() => {
+    if (flag) {
+      setAuxFlag(true)
+    }
+  }, []);
+
+  if (!auxFlag) {
     return (
       <div className={styles.container}>
         <NavBar setIdiom={setIdiom} title={languages[idiom].login_navbar} />
